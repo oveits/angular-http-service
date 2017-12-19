@@ -11,7 +11,14 @@ export class DataService {
 
   getPosts() {
     return this.http.get('https://jsonplaceholder.typicode.com/posts')
-    .map(res => res.json);
+    .map(res => res.json());
   }
 
+}
+
+interface Post{
+  id: number,
+  title: string,
+  body: string,
+  userId: number
 }

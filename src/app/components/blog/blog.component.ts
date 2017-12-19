@@ -8,13 +8,22 @@ import { DataService } from '../../services/data.service'
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
+  posts : Post[];
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
     this.dataService.getPosts().subscribe((posts) => {
-      console.log(posts);
+      //console.log(posts);
+      this.posts = posts;
     });
   }
 
+}
+
+interface Post{
+  id: number,
+  title: string,
+  body: string,
+  userId: number
 }
