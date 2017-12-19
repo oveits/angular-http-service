@@ -1,5 +1,16 @@
-<h1>Posts</h1>
-  <div *ngFor="let post of posts">
-  <h4 [innerHTML]="post.title">Loading...</h4>
-  <p [innerHTML]="post.excerpt"></p>
-  </div>
+<h1>Posts (page: {{page}})</h1>
+  
+  <div *ngIf="posts == undefined;then loading else content" ></div>
+  <ng-template #loading>Loading...</ng-template>
+  <ng-template #content>
+    <div *ngIf="page !=1">
+        <button (click)="previousPage()">Previous Page</button>
+    </div>
+    <button (click)="nextPage()">Next Page</button>
+    <div *ngFor="let post of posts">
+    <h4 [innerHTML]="post.title">Loading...</h4>
+    <p [innerHTML]="post.excerpt"></p>
+    </div>
+    <div>posts: {{posts}}</div>
+    <button (click)="nextPage()">Next Page</button>
+  </ng-template>
