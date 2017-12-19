@@ -12,6 +12,9 @@ export class BlogComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    this.dataService.getPosts().subscribe((posts) => {
+      console.log(posts);
+    });
   }
 
 }

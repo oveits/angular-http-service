@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { DataService } from './services/data.service';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { DataService } from './services/data.service';
     BlogComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
