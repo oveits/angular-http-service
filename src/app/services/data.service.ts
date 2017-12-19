@@ -9,9 +9,9 @@ export class DataService {
     console.log('Data Service connected...')
   }
 
-  getPosts() {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts')
-    .map(res => res.json());
+  getPosts(page : number = 1) {
+    return this.http.get('https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/posts?page=' + page)
+    .map(res => res.json().posts);
   }
 
 }

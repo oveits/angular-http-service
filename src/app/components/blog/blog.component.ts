@@ -9,11 +9,12 @@ import { DataService } from '../../services/data.service'
 })
 export class BlogComponent implements OnInit {
   posts : Post[];
+  page : number = 1;
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.dataService.getPosts().subscribe((posts) => {
+    this.dataService.getPosts(this.page).subscribe((posts) => {
       //console.log(posts);
       this.posts = posts;
     });
@@ -24,6 +25,7 @@ export class BlogComponent implements OnInit {
 interface Post{
   id: number,
   title: string,
-  body: string,
+  content: string,
+  excerpt: string,
   userId: number
 }
