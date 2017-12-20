@@ -1,9 +1,9 @@
 <h1>Posts ({{loadedNumber}})</h1>
 <div class='blogwithinfinitescroll' 
-  infiniteScroll
-  [infiniteScrollDistance]="1"
-  [infiniteScrollThrottle]="500"
-  (scrolled)="appendPage()">
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="500"
+    (scrolled)="appendPage()">
   <div *ngIf="posts == undefined; then loading else content"></div>
   <ng-template #loading>Loading...</ng-template>
   <ng-template #content>

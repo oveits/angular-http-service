@@ -50,5 +50,6 @@ interface Post{
   title: string,
   content: string,
   excerpt: string,
-  userId: number
+  userId: number,
+  URL: string
 }

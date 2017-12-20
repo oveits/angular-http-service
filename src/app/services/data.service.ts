@@ -14,6 +14,11 @@ export class DataService {
     .map(res => res.json().posts);
   }
 
+  getPost(id : number) {
+    return this.http.get('https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/posts/' + id)
+    .map(res => res.json());
+  }
+
 }
 
 interface Post{
