@@ -11,11 +11,12 @@ export class BlogComponent implements OnInit {
   posts : Post[];
   page : number;
   truetest : string = 'true';
-  isLoading : string = 'true'
+  isLoading : string = 'true';
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    window.addEventListener('scroll', (e)=>this.appendPage());
     this.isLoading = "true";
     this.page = 1;
     this.dataService.getPosts(this.page).subscribe((posts) => {
@@ -26,15 +27,19 @@ export class BlogComponent implements OnInit {
   }
 
   appendPage(){
-    this.isLoading = "true";
-    //this.posts = undefined;
-    this.page += 1;
-    this.dataService.getPosts(this.page).subscribe((posts) => {
-      //console.log(posts);
-      this.posts = this.posts.concat(posts);
-      console.log(posts)
-      this.isLoading = "false";
-    });
+    console.log("appendPage called");
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300){
+      console.log("appendPage performed");
+      this.isLoading = "true";
+      //this.posts = undefined;
+      this.page += 1;
+      this.dataService.getPosts(this.page).subscribe((posts) => {
+        //console.log(posts);
+        this.posts = this.posts.concat(posts);
+        console.log(posts)
+        this.isLoading = "false";
+      });
+    }
   }
 
 }
