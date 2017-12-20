@@ -7,12 +7,14 @@ import { BlogComponent } from './components/blog/blog.component';
 import { DataService } from './services/data.service';
 import { HttpModule } from '@angular/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { BlogentryComponent } from './components/blogentry/blogentry.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlogComponent
+    BlogComponent,
+    BlogentryComponent
   ],
   imports: [
     BrowserModule,
