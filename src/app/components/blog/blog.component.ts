@@ -10,32 +10,30 @@ import { DataService } from '../../services/data.service'
 export class BlogComponent implements OnInit {
   posts : Post[];
   page : number;
+  truetest : string = 'true';
+  isLoading : string = 'true'
 
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
+    this.isLoading = "true";
     this.page = 1;
     this.dataService.getPosts(this.page).subscribe((posts) => {
       //console.log(posts);
       this.posts = posts;
+      this.isLoading = "false";
     });
   }
 
-  nextPage(){
-    this.posts = undefined;
+  appendPage(){
+    this.isLoading = "true";
+    //this.posts = undefined;
     this.page += 1;
     this.dataService.getPosts(this.page).subscribe((posts) => {
       //console.log(posts);
-      this.posts = posts;
-    });
-  }
-
-  previousPage(){
-    this.posts = undefined;
-    this.page -= 1;
-    this.dataService.getPosts(this.page).subscribe((posts) => {
-      //console.log(posts);
-      this.posts = posts;
+      this.posts = this.posts.concat(posts);
+      console.log(posts)
+      this.isLoading = "false";
     });
   }
 
