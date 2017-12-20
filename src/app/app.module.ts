@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { DataService } from './services/data.service';
 import { HttpModule } from '@angular/http';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HttpModule } from '@angular/http';
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    InfiniteScrollModule 
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -12,36 +12,37 @@ export class BlogComponent implements OnInit {
   page : number;
   truetest : string = 'true';
   isLoading : string = 'true';
+  loadedNumber : number = 0;
 
   constructor(private dataService:DataService) { }
 
-  ngOnInit() {
-    window.addEventListener('scroll', (e)=>this.appendPage());
+  ngOnInit() {;
     this.isLoading = "true";
     this.page = 1;
     this.dataService.getPosts(this.page).subscribe((posts) => {
       //console.log(posts);
       this.posts = posts;
       this.isLoading = "false";
+      this.loadedNumber = posts.length;
     });
   }
 
   appendPage(){
     console.log("appendPage called");
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300){
-      console.log("appendPage performed");
-      this.isLoading = "true";
-      //this.posts = undefined;
-      this.page += 1;
-      this.dataService.getPosts(this.page).subscribe((posts) => {
-        //console.log(posts);
-        this.posts = this.posts.concat(posts);
-        console.log(posts)
-        this.isLoading = "false";
-      });
-    }
+    this.isLoading = "true";
+    this.page += 1;
+    this.dataService.getPosts(this.page).subscribe((posts) => {
+      //console.log(posts);
+      if(posts.length > 0) {
+        this.loadedNumber += posts.length;
+        this.posts = this.posts.concat(posts);  
+      } else {
+        this.page -= 1;
+      }
+      console.log(posts)
+      this.isLoading = "false";
+    });
   }
-
 }
 
 interface Post{
