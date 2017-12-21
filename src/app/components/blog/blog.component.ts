@@ -30,7 +30,7 @@ export class BlogComponent implements OnInit {
   }
 
   appendPageCachedPromise(){
-    console.log("appendPageCachedPromise called");
+    //console.log("appendPageCachedPromise called for page " + this.page);
     this.isLoading = "true";
     this.page += 1;
     this.dataService.getCachedPromisePosts(this.page).then(res => {
@@ -48,7 +48,7 @@ export class BlogComponent implements OnInit {
   }
 
   appendPageUnCached(){
-    console.log("appendPage called");
+    //console.log("appendPage called for page " + this.page);
     this.isLoading = "true";
     this.page += 1;
     this.dataService.getPosts(this.page).subscribe((posts) => {
