@@ -16,16 +16,35 @@ export class BlogComponent implements OnInit {
   constructor(private dataService:DataService) { }
 
   ngOnInit() {
-    this.appendPage();
+    // get first page:
 /*     this.isLoading = "true";
-    this.page = 1;
-    this.dataService.getPosts(this.page).subscribe((posts) => {
+    this.dataService.getCachedPromisePosts(1).then(
+      res => { // Success
+        console.log(res.json());
+        this.posts = res.json().posts;
+        this.isLoading = "false";
+      }
+    ); */
+    this.appendPageCachedPromise();
+  }
+
+  appendPageCachedPromise(){
+    console.log("appendPageCachedPromise called");
+    this.isLoading = "true";
+    this.page += 1;
+    this.dataService.getCachedPromisePosts(this.page).then(res => {
+      let posts=res.json().posts;
       //console.log(posts);
-      this.posts = posts;
+      if(posts.length > 0) {
+        this.loadedNumber += posts.length;
+        this.posts = this.posts.concat(posts);  
+      } else {
+        this.page -= 1;
+      }
+      console.log(posts)
       this.isLoading = "false";
-      this.loadedNumber = posts.length;
     });
- */  }
+  }
 
   appendPage(){
     console.log("appendPage called");
