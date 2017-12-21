@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 export class DataService {
 
   promisePage1: any;
+  promiseCacheMap: Map<number, Promise<any>>;
 
   constructor(public http:Http) { 
     console.log('Data Service connected...')
@@ -18,15 +19,14 @@ export class DataService {
 
   // cached posts for page 1, uncached posts for other pages:
   getCachedPromisePosts(page : number = 1) {
-    if(page == 1){
-      if(!this.promisePage1){
-        this.promisePage1 = this.http.get('https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/posts?page=' + page).toPromise();
-      }
-      return this.promisePage1;
-    } else {
-    return this.http.get('https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/posts?page=' + page).toPromise();
-    //.then(res => res.json().posts);
+    if(!this.promiseCacheMap){
+      this.promiseCacheMap = new Map<number, Promise<any>>();
     }
+    
+    if(!this.promiseCacheMap[page]){
+      this.promiseCacheMap[page] = this.http.get('https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/posts?page=' + page).toPromise();
+    }
+    return this.promiseCacheMap[page];
   }
 
   getPost(id : number) {

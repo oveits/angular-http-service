@@ -8,6 +8,7 @@ import { DataService } from '../../services/data.service'
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
+  httpCached : boolean = true;
   posts : Post[] = [];
   page : number = 0;
   isLoading : string = 'true';
@@ -17,15 +18,15 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     // get first page:
-/*     this.isLoading = "true";
-    this.dataService.getCachedPromisePosts(1).then(
-      res => { // Success
-        console.log(res.json());
-        this.posts = res.json().posts;
-        this.isLoading = "false";
-      }
-    ); */
-    this.appendPageCachedPromise();
+    this.appendPage();
+  }
+
+  appendPage(){
+    if ( this.httpCached ){
+      return this.appendPageCachedPromise();
+    } else {
+      return this.appendPageUnCached();
+    }
   }
 
   appendPageCachedPromise(){
@@ -41,12 +42,12 @@ export class BlogComponent implements OnInit {
       } else {
         this.page -= 1;
       }
-      console.log(posts)
+      //console.log(posts)
       this.isLoading = "false";
     });
   }
 
-  appendPage(){
+  appendPageUnCached(){
     console.log("appendPage called");
     this.isLoading = "true";
     this.page += 1;
@@ -58,7 +59,7 @@ export class BlogComponent implements OnInit {
       } else {
         this.page -= 1;
       }
-      console.log(posts)
+      //console.log(posts)
       this.isLoading = "false";
     });
   }
