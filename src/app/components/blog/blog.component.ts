@@ -8,16 +8,16 @@ import { DataService } from '../../services/data.service'
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-  posts : Post[];
-  page : number;
-  truetest : string = 'true';
+  posts : Post[] = [];
+  page : number = 0;
   isLoading : string = 'true';
   loadedNumber : number = 0;
 
   constructor(private dataService:DataService) { }
 
-  ngOnInit() {;
-    this.isLoading = "true";
+  ngOnInit() {
+    this.appendPage();
+/*     this.isLoading = "true";
     this.page = 1;
     this.dataService.getPosts(this.page).subscribe((posts) => {
       //console.log(posts);
@@ -25,7 +25,7 @@ export class BlogComponent implements OnInit {
       this.isLoading = "false";
       this.loadedNumber = posts.length;
     });
-  }
+ */  }
 
   appendPage(){
     console.log("appendPage called");
@@ -46,7 +46,7 @@ export class BlogComponent implements OnInit {
 }
 
 interface Post{
-  id: number,
+  ID: number,
   title: string,
   content: string,
   excerpt: string,
