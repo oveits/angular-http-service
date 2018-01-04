@@ -26,6 +26,18 @@
           "/assets/**"
         ]
       }
+    },
+    {
+      "name": "blog",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "urls": [
+          "https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/**",
+          "https://oliverveits.wordpress.com/**",
+          "https://oliverveits.files.wordpress.com/**"
+        ]
+      }
     }
   ]
 }
