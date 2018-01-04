@@ -9,6 +9,8 @@ import { HttpModule } from '@angular/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BlogentryComponent } from './components/blogentry/blogentry.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const appRoutes : Routes = [
   { 
@@ -30,6 +32,7 @@ const appRoutes : Routes = [
   ],
   imports: [
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     HttpModule,
     InfiniteScrollModule,
     RouterModule.forRoot(appRoutes)
