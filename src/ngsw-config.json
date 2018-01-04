@@ -1,27 +1,44 @@
 {
   "index": "/index.html",
-  "assetGroups": [{
-    "name": "app",
-    "installMode": "prefetch",
-    "resources": {
-      "files": [
-        "/favicon.ico",
-        "/index.html"
-      ],
-      "versionedFiles": [
-        "/*.bundle.css",
-        "/*.bundle.js",
-        "/*.chunk.js"
-      ]
+  "assetGroups": 
+  [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html"
+        ],
+        "versionedFiles": [
+          "/*.bundle.css",
+          "/*.bundle.js",
+          "/*.chunk.js"
+        ]
+      }
+    }, 
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/assets/**"
+        ]
+      }
+    }, 
+    {
+      "name": "blog",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "requestMode": "no-cors",
+      "resources": {
+        "urls": [
+          "https://public-api.wordpress.com/rest/v1.1/sites/oliverveits.wordpress.com/**",
+          "https://oliverveits.wordpress.com/**",
+          "https://oliverveits.files.wordpress.com/**"
+        ]
+      }      
     }
-  }, {
-    "name": "assets",
-    "installMode": "lazy",
-    "updateMode": "prefetch",
-    "resources": {
-      "files": [
-        "/assets/**"
-      ]
-    }
-  }]
+  ]
 }
